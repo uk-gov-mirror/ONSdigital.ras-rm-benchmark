@@ -20,10 +20,10 @@ if __name__ == '__main__':
     output_directory = os.getenv('OUTPUT_DIRECTORY')
     filename_prefix = os.getenv('OUTPUT_FILENAME_PREFIX')
 
-    gcs = GoogleCloudStorage(bucket_name=gcs_bucket_name)
+    gcs = GoogleCloudStorage(bucket_name=gcs_bucket_name, directory=output_directory)
     gcs.upload_files(
         output_files=(
-            'performance_graph.png'
+            'performance_graph.png',
         ),
         directory=output_directory,
         output_filename_prefix=filename_prefix,

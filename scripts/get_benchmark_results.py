@@ -8,7 +8,7 @@ from scripts.get_summary import parse_environment_variables
 from scripts.google_cloud_storage import GoogleCloudStorage
 
 if __name__ == '__main__':
-    output_bucket = os.getenv("OUTPUT_BUCKET")
+    output_bucket = os.getenv("GCS_OUTPUT_BUCKET")
 
     parsed_variables = parse_environment_variables()
     number_of_days = parsed_variables['number_of_days']
@@ -21,10 +21,10 @@ if __name__ == '__main__':
     )
 
     if not output_bucket:
-        print("'OUTPUT_BUCKET' environment variable must be provided")
+        print("'GCS_OUTPUT_BUCKET' environment variable must be provided")
         sys.exit(1)
 
-    gcs = GoogleCloudStorage(bucket_name=output_bucket)
+    gcs = GoogleCloudStorage(bucket_name=output_bucket, directory=output_dir)
     print("Fetching files...")
 
     gcs.get_files(from_date=from_date, output_dir=output_dir)

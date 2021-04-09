@@ -11,6 +11,7 @@ class BenchmarkStats:
     def __init__(self, folder_paths: List[str]):
         self._files: List = []
         for folder_path in folder_paths:
+            print(f"folder path {folder_path}")
             self._files.extend(glob(f"{folder_path}/*stats.csv"))
 
         self._requests: Mapping = {
@@ -22,6 +23,9 @@ class BenchmarkStats:
         self._percentiles: Mapping[int : List[float]] = defaultdict(list)  # noqa: E203
 
         self._process_file_data()
+        print("about to print percentiles items")
+        for item in self._percentiles.items():
+            print(item)
 
     def __str__(self):
         formatted_percentiles = "\n".join(
@@ -45,6 +49,7 @@ class BenchmarkStats:
         for file in self.files:
             with open(file) as fp:
                 for row in DictReader(fp, delimiter=","):
+                    print(f"row {row}")
                     request_count = int(
                         row.get("Request Count") or row.get("# requests")
                     )

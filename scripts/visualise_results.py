@@ -35,14 +35,15 @@ if __name__ == '__main__':
     number_of_days = parsed_variables['number_of_days']
 
     folders = sorted(glob(f"{parsed_variables['output_dir']}/*"))
+    print(f"folders {folders}")
     results = get_results(folders, number_of_days)
-
+    print(f"results {results}")
     result_fields = [
         [
             result.date,
             *(
                 result.statistics.percentiles[percentile]
-                for percentile in PERCENTILES_TO_GRAPH
+                for percentile in PERCENTILES_TO_GRAPH if percentile in result.statistics.percentiles
             ),
         ]
         for result in results
