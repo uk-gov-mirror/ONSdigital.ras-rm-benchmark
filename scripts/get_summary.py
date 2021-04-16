@@ -22,12 +22,10 @@ def get_results(folders, number_of_days=None):
 
     for folder in folders:
         date = folder.split("/")[-1].split("T")[0]
-        print(f"date {date}")
         if from_date and datetime.strptime(date, "%Y-%m-%d") < from_date:
             continue
         yield Result(date, BenchmarkStats([folder]))
-
-
+      
 def parse_environment_variables():
 
     days = os.getenv("NUMBER_OF_DAYS")
@@ -48,12 +46,16 @@ if __name__ == "__main__":
     parsed_variables = parse_environment_variables()
     date_to_output = parsed_variables["output_date"]
     sorted_folders = sorted(glob(f"{parsed_variables['output_dir']}/*"), reverse=True)
-    results = get_results(sorted_folders)
+    with open("results.txt", 'w') as file:
+        file.write("Results: \n")
+        results = get_results(sorted_folders)
 
-    for result in results:
-        if date_to_output:
-            if result.date == date_to_output:
-                print(result.statistics)
-                break
-        else:
-            print(result)
+        for result in results:
+            if date_to_output:
+                if result.date == date_to_output:
+                    print(result.statistics)
+                    file.write(str(result.statistics))
+                    break
+            else:
+                print(result)
+                file.write(str(result))

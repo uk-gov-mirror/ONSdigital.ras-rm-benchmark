@@ -24,6 +24,7 @@ if __name__ == '__main__':
     gcs.upload_files(
         output_files=(
             'performance_graph.png',
+            'results.txt',
         ),
         directory=output_directory,
         output_filename_prefix=filename_prefix,
