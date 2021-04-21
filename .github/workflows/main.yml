@@ -13,7 +13,6 @@ on:
       - main
     paths-ignore:
       - _infra/spinnaker/**
-      - _infra/helm/ras-rm-benchmark/Chart.yaml
 
 env:
   IMAGE: ras-rm-benchmark
