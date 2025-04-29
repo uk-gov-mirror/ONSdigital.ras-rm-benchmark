@@ -20,7 +20,7 @@ jobs:
           echo "PR_NUMBER=${PR_NUMBER}" >> $GITHUB_ENV
           echo "The PR tag is $PR_NUMBER"
 
-      - uses: google-github-actions/setup-gcloud@master
+      - uses: google-github-actions/setup-gcloud@20c93dacc1d70ddbce76c63ab32c35595345bdd1 # v0.7.0
         with:
           project_id: ${{ secrets.GOOGLE_PROJECT_ID }}
           service_account_key: ${{ secrets.GCR_KEY }}
